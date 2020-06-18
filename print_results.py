@@ -71,26 +71,25 @@ def print_results(results_dic, results_stats_dic, model,
     print(" ")
     for key in results_stats_dic:
         if key.startswith('p'):
-            print("{:20}: {:.2f}".format(key, results_stats_dic[key]))
+            print("%20s: %5.1f" % (key, results_stats_dic[key]))
+            
+            
             
     if (print_incorrect_dogs and 
         ( (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'])
           != results_stats_dic['n_images'] ) 
        ):
         print("\nINCORRECT Dog/NOT Dog Assignments:")
-            
-    
-          
+           
     
     # process through results dict, printing incorrectly classified breeds
         for key in results_dic:
-            
-    # Pet Image Label is-a-Dog, classified as-a-dog but is WRONG breed
-            if ( sum(results_dic[key][3:]) == 2 and
-                results_dic[key][2] == 0 ):
+            if sum(results_dic[key][3:]) == 1:
                 print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0],
-                                                         results_dic[key][1]))
+                                                          results_dic[key][1]))
                 
+            
+    # Pet Image Label is-a-Dog, classified as-a-dog but is WRONG breed        
     if (print_incorrect_breed and 
         (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']) 
        ):
@@ -104,7 +103,7 @@ def print_results(results_dic, results_stats_dic, model,
                 print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0],
                                                           results_dic[key][1]))
  
-    None
+    
                 
        
                 
